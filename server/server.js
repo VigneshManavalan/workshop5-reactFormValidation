@@ -2,7 +2,7 @@ const express = require("express")
 const app = express()
 const mongoose = require('mongoose');
 const bodyParser = require("body-parser")
-const Record = require("./Models/RecordSchema")
+const User = require("./Models/Users")
 const connectToDatabase = () => {
     const mongoDB = 'mongodb://127.0.0.1:27017/users';
     mongoose.connect(mongoDB, {useNewUrlParser: true, useUnifiedTopology: true});
@@ -23,7 +23,15 @@ app.post("/user",(req,res)=>{
     })
 
     userToInsert.save().then(data=>{
-        res.json(data._id)})
+        console.log(data)
+        res.json(data._id)}
+        
+        
+        )
 })
 
+app.get("/user",(req,res)=>{
+    const email = req.body.email
+    const password = req.body.password
+})
 connectToDatabase()

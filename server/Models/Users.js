@@ -6,5 +6,5 @@ const Users = new mongoose.Schema(
 	}
 )
 
-const model = mongoose.model('Users', RecordSchema)
+const model = mongoose.model('Users', Users)
 module.exports = model
