@@ -31,9 +31,20 @@ app.post("/user",(req,res)=>{
         )
 })
 
-app.get("/user",(req,res)=>{
+app.post("/user/login",async(req,res)=>{
     const email = req.body.email
     const password = req.body.password
+    const userByEmail = await User.findOne({email:email})
+    if(userByEmail!=null){
+        if(userByEmail.password==password){
+        res.json({logged:true})}
+        else{
+            res.status(403).json({logged:false})
+        }
+    }
+    else{
+        res.status(403).json({logged:false})
+    }
 })
 app.listen(5000)
 connectToDatabase()
